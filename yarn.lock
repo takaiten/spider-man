@@ -9,6 +9,11 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
+"@babylonjs/core@^5.44.0":
+  version "5.44.0"
+  resolved "https://registry.yarnpkg.com/@babylonjs/core/-/core-5.44.0.tgz#92de05b7da7979efe6943a0fdc96aa90c1303ad6"
+  integrity sha512-ph41bRLY3rBRxM3MELyuFSUY+wh9EM887pfy+e9w9JiCJQsRMU8feBngliAjuPOyz3OUNgIcqZR9EJTO4pxGNg==
+
 "@eslint/eslintrc@^1.4.1":
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-1.4.1.tgz#af58772019a2d271b7e2d4c23ff4ddcba3ccfb3e"

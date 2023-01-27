@@ -1,0 +1,28 @@
+.hudContainer {
+    z-index: 1;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.button {
+    padding: 8px 32px;
+    text-transform: uppercase;
+    background-color: #fff;
+    border-radius: 16px;
+    color: #000;
+}
+
+.fill {
+    flex-grow: 1;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+}
