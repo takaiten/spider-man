@@ -1,8 +1,19 @@
-.hudContainer {
+.container {
     z-index: 1;
     display: flex;
     flex-grow: 1;
     flex-direction: column;
+    padding: 32px 64px;
+}
+
+.content {
+    flex: 1 1 auto;
+}
+
+header, footer {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: space-between;
 }
 
 .button {
@@ -11,18 +22,4 @@
     background-color: #fff;
     border-radius: 16px;
     color: #000;
-}
-
-.fill {
-    flex-grow: 1;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-}
-
-.footer {
-    display: flex;
-    justify-content: space-between;
 }

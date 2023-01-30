@@ -5,8 +5,8 @@ type HUDProps = {};
 
 const HUD: React.FC<HUDProps> = () => {
   return (
-    <div className={styles.hudContainer}>
-      <div className={styles.header}>
+    <div className={styles.container}>
+      <header className={styles.header}>
         <div>
           <span>🕸</span>&nbsp;
           <span>menu</span>
@@ -14,12 +14,12 @@ const HUD: React.FC<HUDProps> = () => {
         <div>
           <button className={styles.button}>Buy tickets</button>
         </div>
-      </div>
-      <div className={styles.fill} />
-      <div className={styles.footer}>
+      </header>
+      <div className={styles.content} />
+      <footer className={styles.footer}>
         <span>Marvel</span>
         <span>Sony</span>
-      </div>
+      </footer>
     </div>
   );
 };
