@@ -23,15 +23,17 @@ const MainScene: React.FC<MainSceneProps> = () => {
     <div className={styles.scene}>
       <Engine antialias adaptToDeviceRatio canvasId="babylonJS">
         <Scene assignFrom="blurPostProcess">
-          <Skybox rootUrl="/assets/textures/cubemap/nyc" size={10000} />
+          <Skybox rootUrl="/assets/textures/cubemap/nyc" size={100} />
           <arcRotateCamera
             name="camera1"
-            target={Vector3.Forward()}
+            position={new Vector3(0, 1, 2)}
+            target={new Vector3(0, 1, 0)}
             alpha={Math.PI / 2}
-            beta={Math.PI / 4}
-            radius={8}
+            beta={Math.PI / 2.5}
+            radius={4}
           />
           <hemisphericLight name="light1" intensity={0.7} direction={Vector3.Up()} />
+          <sphere name="sphere1" position={new Vector3(0, 2, -3)} />
           <Suspense fallback={<CustomFallback />}>
             <Model rootUrl="/assets/scenes/" sceneFilename="main.babylon" name="spiderman1" />
           </Suspense>
