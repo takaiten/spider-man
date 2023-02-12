@@ -19,6 +19,11 @@
   resolved "https://registry.yarnpkg.com/@babylonjs/gui/-/gui-5.44.0.tgz#d84c160980520a439ebcace62373ba87efe7331d"
   integrity sha512-9mNrHwSebCZ3qVBh4nWuc8lW6pQ9zimwWQqSkyPO80Vxks+lWDaza83VLQgBxfF4Zvtvukp/1wIWQT+F9wpznQ==
 
+"@babylonjs/loaders@^5.45.1":
+  version "5.45.1"
+  resolved "https://registry.yarnpkg.com/@babylonjs/loaders/-/loaders-5.45.1.tgz#b76c8bd1ce5951dae7e83df63591d0bfd9b0e15f"
+  integrity sha512-GOBw9/jBdbFDqGSqQOaNUapJ7DQhJ7sipjDukIN8nfeF9JO9VirqONJy+E3BYpeN6UuR6Jdylc4ZKw258YKc0A==
+
 "@eslint/eslintrc@^1.4.1":
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-1.4.1.tgz#af58772019a2d271b7e2d4c23ff4ddcba3ccfb3e"
