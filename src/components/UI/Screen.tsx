@@ -1,9 +1,14 @@
+'use client';
+
 import React from 'react';
+import { useScene } from 'babylonjs-hook';
 import styles from './Screen.module.css';
 
 type ScreenProps = {};
 
 const Screen: React.FC<ScreenProps> = () => {
+  const scene = useScene();
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
