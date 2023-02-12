@@ -1,28 +1,15 @@
 'use client';
 
-import React, { Suspense, useCallback } from 'react';
-import { Engine, Scene, Skybox, Model, useScene } from 'react-babylonjs';
+import React from 'react';
+import SceneComponent, { useScene } from 'babylonjs-hook';
 import * as BABYLON from '@babylonjs/core';
-
 import '@babylonjs/loaders/glTF';
-
-import type { SceneEventArgs } from 'react-babylonjs';
 
 import styles from './MainScene.module.css';
 
 type MainSceneProps = {};
 
-const CustomFallback = () => {
-  return (
-    <adtFullscreenUi name="ui">
-      <rectangle name="rect" height="50px" width="150px">
-        Loading...
-      </rectangle>
-    </adtFullscreenUi>
-  );
-};
-
-const handleSceneMount = ({ scene, canvas }: SceneEventArgs) => {
+const onSceneReady = (scene: BABYLON.Scene) => {
   //! Camera
   const camera = new BABYLON.ArcRotateCamera(
     'camera1',
@@ -33,9 +20,11 @@ const handleSceneMount = ({ scene, canvas }: SceneEventArgs) => {
     scene,
     true,
   );
+  camera.allowUpsideDown = false;
   camera.fov = 0.6;
   camera.minZ = 0.001;
-  camera.attachControl(canvas);
+  // This attaches the camera to the canvas
+  camera.attachControl(true, true);
   //! --- Light ---
   const light = new BABYLON.DirectionalLight('light1', new BABYLON.Vector3(1, -2, -1), scene);
   light.intensity = 2;
@@ -93,7 +82,7 @@ const handleSceneMount = ({ scene, canvas }: SceneEventArgs) => {
 
   // Calculate the animation duration in milliseconds
   const duration = 7000;
-  const fps = 60;
+  const fps = 24;
   const frameCount = fps * (duration / 1000);
 
   const positionAnimation = new BABYLON.Animation(
@@ -134,11 +123,7 @@ const handleSceneMount = ({ scene, canvas }: SceneEventArgs) => {
 const MainScene: React.FC<MainSceneProps> = () => {
   return (
     <div className={styles.scene}>
-      <Engine antialias adaptToDeviceRatio canvasId="babylonJS">
-        <Scene onSceneMount={handleSceneMount}>
-          <Suspense fallback={<CustomFallback />}></Suspense>
-        </Scene>
-      </Engine>
+      <SceneComponent antialias onSceneReady={onSceneReady}></SceneComponent>
     </div>
   );
 };
