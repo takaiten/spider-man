@@ -1,13 +1,13 @@
 import styles from './page.module.css';
 
-import HUD from '~/components/HeadsUpDisplay';
-import MainScene from '~/components/MainScene';
+import Screen from '~/components/UI/Screen';
+import Scene from '~/components/3D/MainScene';
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <HUD />
-      <MainScene />
+      <Screen />
+      <Scene />
     </main>
   );
 }
