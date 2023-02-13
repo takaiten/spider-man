@@ -1,30 +1,36 @@
 'use client';
 
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import SceneComponent, { useScene } from 'babylonjs-hook';
 import * as BABYLON from '@babylonjs/core';
 import '@babylonjs/loaders/glTF';
 
 import styles from './MainScene.module.css';
 
-type MainSceneProps = {};
+type MainSceneProps = PropsWithChildren<{}>;
+
+function degreesToRadians(degrees: number) {
+  return (degrees * Math.PI) / 180;
+}
 
 const onSceneReady = (scene: BABYLON.Scene) => {
+  const startPosition = new BABYLON.Vector3(0, 1.4, 0);
+  const startRotation = degreesToRadians(110);
   //! Camera
   const camera = new BABYLON.ArcRotateCamera(
     'camera1',
-    0,
-    Math.PI / 2,
+    startRotation,
+    degreesToRadians(90),
     1,
-    new BABYLON.Vector3(0, 1.7, 0),
+    startPosition,
     scene,
     true,
   );
   camera.allowUpsideDown = false;
-  camera.fov = 0.6;
+  camera.fov = 0.68;
   camera.minZ = 0.001;
   // This attaches the camera to the canvas
-  camera.attachControl(true, true);
+  // camera.attachControl(true, true);
   //! --- Light ---
   const light = new BABYLON.DirectionalLight('light1', new BABYLON.Vector3(1, -2, -1), scene);
   light.intensity = 2;
@@ -75,10 +81,8 @@ const onSceneReady = (scene: BABYLON.Scene) => {
 
   //! --- Animation ---
   // Define the start and end position and rotation for the camera
-  const startPosition = new BABYLON.Vector3(0, 1.7, 0);
   const endPosition = new BABYLON.Vector3(0, 0.1, 0);
-  const startRotation = Math.PI;
-  const endRotation = 2 * Math.PI;
+  const endRotation = degreesToRadians(360);
 
   // Calculate the animation duration in milliseconds
   const duration = 7000;
@@ -98,7 +102,7 @@ const onSceneReady = (scene: BABYLON.Scene) => {
     { frame: frameCount, value: endPosition },
   ]);
   // Apply the animation to the camera
-  camera.animations.push(positionAnimation);
+  // camera.animations.push(positionAnimation);
 
   // Repeat the process for the camera's rotation
   const rotationAnimation = new BABYLON.Animation(
@@ -112,18 +116,26 @@ const onSceneReady = (scene: BABYLON.Scene) => {
     { frame: 0, value: startRotation },
     { frame: frameCount, value: endRotation },
   ]);
-  camera.animations.push(rotationAnimation);
+  // camera.animations.push(rotationAnimation);
+
+  // create an animation group
+  const animationGroup = new BABYLON.AnimationGroup('cameraAnimations');
+
+  // add animations to the animation group
+  animationGroup.addTargetedAnimation(positionAnimation, camera);
+  animationGroup.addTargetedAnimation(rotationAnimation, camera);
+
   //! Load model
-  BABYLON.SceneLoader.Append('/assets/objects/', 'platform.glb', scene);
-  BABYLON.SceneLoader.AppendAsync('/assets/objects/', 'spiderman.glb', scene).then((s) => {
-    s.beginAnimation(s.activeCamera, 0, frameCount, false, 1);
-  });
+  BABYLON.SceneLoader.AppendAsync('/assets/objects/', 'platform.glb', scene);
+  BABYLON.SceneLoader.AppendAsync('/assets/objects/', 'spiderman.glb', scene);
 };
 
-const MainScene: React.FC<MainSceneProps> = () => {
+const MainScene: React.FC<MainSceneProps> = ({ children }) => {
   return (
     <div className={styles.scene}>
-      <SceneComponent antialias onSceneReady={onSceneReady}></SceneComponent>
+      <SceneComponent antialias onSceneReady={onSceneReady}>
+        {children}
+      </SceneComponent>
     </div>
   );
 };

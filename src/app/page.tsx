@@ -6,8 +6,9 @@ import Scene from '~/components/3D/MainScene';
 export default function Home() {
   return (
     <main className={styles.main}>
-      <Screen />
-      <Scene />
+      <Scene>
+        <Screen />
+      </Scene>
     </main>
   );
 }

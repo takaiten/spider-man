@@ -3,11 +3,14 @@
     display: flex;
     flex-grow: 1;
     flex-direction: column;
-    padding: 32px 64px;
+    padding: 64px 128px;
 }
 
 .content {
     flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .header, .footer {
@@ -22,4 +25,32 @@
     background-color: #fff;
     border-radius: 16px;
     color: #000;
+}
+
+.scrollbar {
+  width: 16px;
+  height: 50vh;
+  position: relative;
+  float: right;
+}
+
+.scrollbarLine {
+  opacity: 0.7;
+  width: 2px;
+  height: 100%;
+  background-color: #888;
+  position: absolute;
+  left: 7px;
+  top: 0;
+}
+
+.scrollbarCircle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #ddd;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(-50%);
 }
