@@ -13,10 +13,24 @@
     justify-content: flex-end;
 }
 
+.headerLeft {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    padding-right: 32px;
+}
+
 .header, .footer {
     flex: 0 0 auto;
     display: flex;
     justify-content: space-between;
+}
+
+.footer {
+    font-size: 0.75rem;
+    font-weight: 300;
 }
 
 .button {
@@ -25,32 +39,5 @@
     background-color: #fff;
     border-radius: 16px;
     color: #000;
-}
-
-.scrollbar {
-  width: 16px;
-  height: 50vh;
-  position: relative;
-  float: right;
-}
-
-.scrollbarLine {
-  opacity: 0.7;
-  width: 2px;
-  height: 100%;
-  background-color: #888;
-  position: absolute;
-  left: 7px;
-  top: 0;
-}
-
-.scrollbarCircle {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: #ddd;
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform: translateY(-50%);
+    font-weight: 700;
 }
