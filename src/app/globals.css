@@ -1,28 +1,3 @@
-@font-face {
-  font-family: "ShinGo";
-  src: url('/assets/fonts/G-OTF Shin Go Pro/G-OTF Shin Go Pro L.otf');
-  font-weight: lighter;
-  font-style: normal;
-}
-  
-@font-face {
-  font-family: "ShinGo";
-  src: url('/assets/fonts/G-OTF Shin Go Pro/G-OTF Shin Go Pro R.otf');
-  font-weight: normal;
-  font-style: normal;
-}
-  
-@font-face {
-  font-family: "ShinGo";
-  src: url('/assets/fonts/G-OTF Shin Go Pro/G-OTF Shin Go Pro B.otf');
-  font-weight: bold;
-  font-style: normal;
-}
-
-:root {
-  --shin-go: "ShinGo"
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -32,8 +7,6 @@
 html,
 body {
   max-width: 100vw;
-  overflow: hidden;
-  font-family: var(--shin-go), sans-serif;
 }
 
 body {
