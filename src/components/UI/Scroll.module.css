@@ -1,6 +1,6 @@
 .scrollbar {
   width: 16px;
-  height: 50vh;
+  height: 50%;
   position: relative;
   float: right;
 }

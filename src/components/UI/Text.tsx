@@ -15,7 +15,7 @@ const Text: React.FC<TextProps> = () => {
           <p>DIRECTED BY</p>
           <h3>JON WATTS</h3>
         </div>
-        <div className={styles.foreground} style={{ paddingTop: '5em', float: 'right' }}>
+        <div className={styles.foreground} style={{ paddingTop: '6em', float: 'right' }}>
           <p>CAST</p>
           <h3>TOM HOLLAND</h3>
           <h3>ZENDAYA</h3>
@@ -23,7 +23,7 @@ const Text: React.FC<TextProps> = () => {
         </div>
         <div
           className={styles.foreground}
-          style={{ paddingTop: '5em', paddingBottom: '8em', clear: 'both' }}
+          style={{ paddingTop: '6em', paddingBottom: '8em', clear: 'both' }}
         >
           <p>RELEASE DAY</p>
           <h2>DEC 17, 2021</h2>
