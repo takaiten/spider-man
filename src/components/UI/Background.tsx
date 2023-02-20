@@ -11,7 +11,7 @@ const Background: React.FC = () => {
       if (ref.current) {
         const percent =
           -ref.current.getBoundingClientRect().y / (ref.current.offsetHeight - window.innerHeight);
-        ref.current.style.setProperty('--parallax-y', `${(percent * 100) / 2}%`);
+        ref.current.style.setProperty('--parallax-y', `${percent * 100}%`);
       }
     };
     window.addEventListener('scroll', handleScroll);

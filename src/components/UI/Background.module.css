@@ -7,17 +7,15 @@
   overflow: hidden;
   z-index: -1;
   filter: blur(8px);
-  transform: translateZ(-1px);
+  transform: translateZ(-3px);
 }
 
 .bgImage {
   background-image: url('/assets/images/cyberpunk-city.jpg');
-  background-size: cover;
-  background-position: center;
+  background-position: calc(var(--parallax-y, 0) / -3) calc(var(--parallax-y, 0) / 2);
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  transform: translateY(var(--parallax-y, 0));
 }

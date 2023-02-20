@@ -7,7 +7,9 @@ type ScrollProps = {
   speed?: number;
 };
 
-const Scroll = memo<ScrollProps>(({ start = 1, speed = 0.1 }) => {
+// TODO: investigate other browsers, chrome does not work as intended
+// One solution I think of is to use scroll progress from background component
+const Scroll = memo<ScrollProps>(({ start = 1, speed = 0.25 }) => {
   const [frame, setFrame] = useState(start);
   const [lastFrame, setLastFrame] = useState(start);
   const scene = useScene();

@@ -76,5 +76,3 @@ export const setupEnvironment = (scene: Scene) => {
   // skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
   // skybox.material = skyboxMaterial;
 };
-
-const createScene = (scene: Scene) => {};

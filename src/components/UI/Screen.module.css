@@ -22,6 +22,11 @@
     padding-right: 32px;
 }
 
+.logo > img {
+    height: 32px;
+    width: fit-content;
+}
+
 .header, .footer {
     flex: 0 0 auto;
     display: flex;

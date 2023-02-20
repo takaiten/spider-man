@@ -5,6 +5,8 @@ import Image from 'next/image';
 
 import styles from './Screen.module.css';
 import Scroll from './Scroll';
+import ScrollHide from './ScrollHide';
+import { smoothScroll } from '~/helpers/dom';
 
 type ScreenProps = {};
 
@@ -26,8 +28,21 @@ const Screen: React.FC<ScreenProps> = () => {
             <Image loading="eager" src="/assets/vector/menu.svg" width={32} height={32} alt="+" />
           </span>
         </div>
+        <ScrollHide>
+          <div className={styles.logo}>
+            <Image
+              loading="eager"
+              src="/assets/images/spiderman-logo.png"
+              width={3023}
+              height={386}
+              alt="logo"
+            />
+          </div>
+        </ScrollHide>
         <div>
-          <button className={styles.button}>Buy tickets</button>
+          <button onClick={() => smoothScroll(3555, 7000)} className={styles.button}>
+            Buy tickets
+          </button>
         </div>
       </header>
       <div className={styles.content}>
