@@ -22,6 +22,6 @@
   background-color: #ddd;
   position: absolute;
   left: 0;
-  top: 0;
+  top: var(--progress, 0);
   transform: translateY(-50%);
 }
