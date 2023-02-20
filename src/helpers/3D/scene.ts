@@ -1,24 +1,43 @@
 import * as BABYLON from '@babylonjs/core';
+import { degreesToRadians } from '../math';
 
 type Scene = BABYLON.Scene;
 
 export const setupCamera = (...args: ConstructorParameters<typeof BABYLON.ArcRotateCamera>) => {
   const camera = Reflect.construct(BABYLON.ArcRotateCamera, args);
   camera.allowUpsideDown = false;
-  camera.fov = 0.68;
+  camera.fov = degreesToRadians(30);
   camera.minZ = 0.001;
   return camera;
 };
 
-export const setupLight = (scene: Scene) => {
-  const light = new BABYLON.HemisphericLight('light2', new BABYLON.Vector3(0, -1, 0), scene);
-  light.intensity = 0.1;
-  const dirLight = new BABYLON.DirectionalLight('light1', new BABYLON.Vector3(1, -2, -1), scene);
-  dirLight.intensity = 2;
-  const shadowGenerator = new BABYLON.ShadowGenerator(1024, dirLight, true);
-  shadowGenerator.useBlurExponentialShadowMap = true;
-  shadowGenerator.blurKernel = 64;
+const createPointLight = (scene: Scene, name: string, pos: BABYLON.Vector3, debug = false) => {
+  const light = new BABYLON.PointLight(name, pos, scene);
+  if (debug) {
+    const s = BABYLON.MeshBuilder.CreateSphere(name + '_debug', { diameter: 0.02 }, scene);
+    s.position = pos;
+  }
   return light;
+};
+
+export const setupLight = (scene: Scene) => {
+  const pl1 = createPointLight(scene, 'pl1', new BABYLON.Vector3(0.5, 1.5, 0.2));
+  pl1.intensity = 3;
+  pl1.range = 2;
+  const pl2 = createPointLight(scene, 'pl2', new BABYLON.Vector3(-0.2, 1.23, -0.2));
+  pl2.intensity = 0.5;
+  pl2.range = 0.1;
+  pl2.diffuse = new BABYLON.Color3(0.99, 0.22, 0.59);
+  const pl3 = createPointLight(scene, 'pl3', new BABYLON.Vector3(-0.1, 0.4, -0.2));
+  pl3.intensity = 0.5;
+  pl3.range = 0.1;
+  const hsLight = new BABYLON.HemisphericLight('light2', new BABYLON.Vector3(0, 1, 0), scene);
+  hsLight.intensity = 0.1;
+  hsLight.groundColor = new BABYLON.Color3(0.63, 0.22, 0.37);
+  // const shadowGenerator = new BABYLON.ShadowGenerator(1024, spotLight, true);
+  // shadowGenerator.useBlurExponentialShadowMap = true;
+  // shadowGenerator.blurKernel = 64;
+  return pl1;
 };
 
 export const setupPipeline = (scene: Scene) => {

@@ -6,18 +6,17 @@ import * as BABYLON from '@babylonjs/core';
 import '@babylonjs/loaders/glTF';
 
 import { setupCamera, setupEnvironment, setupLight, setupPipeline } from '~/helpers/3D/scene';
+import { degreesToRadians } from '~/helpers/math';
 import styles from './MainScene.module.css';
 
 type MainSceneProps = PropsWithChildren<{}>;
 
-function degreesToRadians(degrees: number) {
-  return (degrees * Math.PI) / 180;
-}
-
 const onSceneReady = (scene: BABYLON.Scene) => {
   //! Load models
   BABYLON.SceneLoader.ImportMeshAsync('', '/assets/objects/', 'spiderman.glb', scene);
-  BABYLON.SceneLoader.ImportMeshAsync('', '/assets/objects/', 'platform.glb', scene);
+  BABYLON.SceneLoader.ImportMeshAsync('', '/assets/objects/', 'platform.glb', scene).then((res) => {
+    res.meshes[0].receiveShadows = true;
+  });
 
   setupLight(scene);
   setupPipeline(scene);
@@ -30,7 +29,7 @@ const onSceneReady = (scene: BABYLON.Scene) => {
     'camera1',
     startRotation,
     degreesToRadians(90),
-    1,
+    1.2,
     startPosition,
     scene,
     true,
@@ -47,7 +46,7 @@ const onSceneReady = (scene: BABYLON.Scene) => {
   const frameCount = fps * (duration / 1000);
 
   // Define the end position and rotation for the camera
-  const endPosition = new BABYLON.Vector3(0, 0.1, 0);
+  const endPosition = new BABYLON.Vector3(0, 0.15, 0);
 
   const positionAnimation = new BABYLON.Animation(
     'positionAnimation',
@@ -63,7 +62,7 @@ const onSceneReady = (scene: BABYLON.Scene) => {
     { frame: frameCount, value: endPosition },
   ]);
 
-  const endRotation = degreesToRadians(330);
+  const endRotation = degreesToRadians(320);
 
   const rotationAnimation = new BABYLON.Animation(
     'rotationAnimation',
