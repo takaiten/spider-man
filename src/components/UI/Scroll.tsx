@@ -2,8 +2,6 @@ import React, { useState, useEffect, memo, useRef } from 'react';
 import { useScene } from 'babylonjs-hook';
 import styles from './Scroll.module.css';
 
-// TODO: investigate other browsers, chrome does not work as intended
-// One solution I think of is to use scroll progress from background component
 const Scroll = memo(() => {
   const ref = useRef<HTMLDivElement>(null);
   const scene = useScene();

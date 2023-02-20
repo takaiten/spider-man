@@ -17,11 +17,7 @@ const Background: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  return (
-    <div ref={ref} className={style.bgContainer}>
-      <div className={style.bgImage} />
-    </div>
-  );
+  return <div ref={ref} className={style.bgImage} />;
 };
 
 export default Background;

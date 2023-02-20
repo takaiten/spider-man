@@ -3,6 +3,10 @@
     padding: 0px 4em;
 }
 
+.container * {
+    position: relative;
+}
+
 .innerContainer {
     padding: 0 1em;
 }
@@ -21,11 +25,9 @@
 }
 
 .foreground {
-    z-index: 2;
-    transform: translateZ(1px);
+    z-index: 1;
 }
 
 .background {
     z-index: 0;
-    transform: translateZ(-1px);
 }
