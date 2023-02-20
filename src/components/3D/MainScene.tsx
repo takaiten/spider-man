@@ -42,7 +42,7 @@ const onSceneReady = (scene: BABYLON.Scene) => {
 
   // Calculate the animation duration in milliseconds
   const duration = 7000;
-  const fps = 24;
+  const fps = 60;
   const frameCount = fps * (duration / 1000);
 
   // Define the end position and rotation for the camera
