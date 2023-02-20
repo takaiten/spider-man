@@ -8,11 +8,11 @@ import Text from '~/components/UI/Text';
 export default function Home() {
   return (
     <main className={styles.main}>
-      <Background />
       <Scene>
+        <Text />
+        <Background />
         <Screen />
       </Scene>
-      <Text />
     </main>
   );
 }

@@ -1,23 +1,10 @@
-.bgContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+.bgImage {
+  background-image: url('/assets/images/cyberpunk-city.jpg');
+  background-position: calc(40% + var(--parallax-y, 0) / -3) calc(var(--parallax-y, 0) / 2);
+  position: fixed;
   height: 100%;
-  overflow: hidden;
+  width: 100%;
   z-index: -1;
   filter: blur(8px);
   will-change: filter;
-  transform: translateZ(-3px);
-}
-
-.bgImage {
-  background-image: url('/assets/images/cyberpunk-city.jpg');
-  background-position: calc(var(--parallax-y, 1) / -3) calc(var(--parallax-y, 0) / 2);
-  background-size: 215%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
 }
