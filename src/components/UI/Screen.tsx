@@ -40,7 +40,7 @@ const Screen: React.FC<ScreenProps> = () => {
           </div>
         </ScrollHide>
         <div>
-          <button onClick={() => smoothScroll(3555, 7000)} className={styles.button}>
+          <button onClick={() => smoothScroll(3555, 6000)} className={styles.button}>
             Buy tickets
           </button>
         </div>

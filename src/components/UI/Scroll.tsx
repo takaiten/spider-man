@@ -1,41 +1,32 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect, memo, useRef } from 'react';
 import { useScene } from 'babylonjs-hook';
 import styles from './Scroll.module.css';
 
-type ScrollProps = {
-  start?: number;
-  speed?: number;
-};
-
 // TODO: investigate other browsers, chrome does not work as intended
 // One solution I think of is to use scroll progress from background component
-const Scroll = memo<ScrollProps>(({ start = 1, speed = 0.25 }) => {
-  const [frame, setFrame] = useState(start);
-  const [lastFrame, setLastFrame] = useState(start);
+const Scroll = memo(() => {
+  const ref = useRef<HTMLDivElement>(null);
   const scene = useScene();
 
   useEffect(() => {
-    const animGroup = scene?.getAnimationGroupByName('cameraAnimations');
-    if (!animGroup) return;
-    setLastFrame(animGroup.to);
-    const handleScroll = (event: WheelEvent) => {
-      setFrame((prev) => {
-        const value = Math.max(start, Math.min(prev + event.deltaY * speed, animGroup.to));
-        animGroup.goToFrame(value);
-        animGroup.play();
-        animGroup.pause();
-        return value;
-      });
+    const animGroup = scene?.getAnimationGroupByName('cameraAnimations') ?? null;
+    const handleScroll = () => {
+      if (!animGroup) return;
+      const percent = window.scrollY / (document.body.clientHeight - window.innerHeight);
+      animGroup.goToFrame(percent * animGroup.to);
+      animGroup.play();
+      animGroup.pause();
+      if (!ref.current) return;
+      ref.current.style.setProperty('--progress', `${percent * 100}%`);
     };
-
-    window.addEventListener('wheel', handleScroll, { capture: false });
-    () => window.removeEventListener('wheel', handleScroll);
-  }, [scene, setFrame]);
+    window.addEventListener('scroll', handleScroll, false);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [scene]);
 
   return (
-    <div className={styles.scrollbar}>
+    <div ref={ref} className={styles.scrollbar}>
       <div className={styles.scrollbarLine} />
-      <div className={styles.scrollbarCircle} style={{ top: `${(frame / lastFrame) * 100}%` }} />
+      <div className={styles.scrollbarCircle} />
     </div>
   );
 });

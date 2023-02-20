@@ -9,12 +9,11 @@ const Background: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (ref.current) {
-        const percent =
-          -ref.current.getBoundingClientRect().y / (ref.current.offsetHeight - window.innerHeight);
+        const percent = window.scrollY / (document.body.clientHeight - window.innerHeight);
         ref.current.style.setProperty('--parallax-y', `${percent * 100}%`);
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, false);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
