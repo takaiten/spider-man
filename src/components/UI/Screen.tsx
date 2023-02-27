@@ -1,16 +1,15 @@
 'use client';
 
-import React from 'react';
+import React, { memo } from 'react';
 import Image from 'next/image';
 
 import styles from './Screen.module.css';
 import Scroll from './Scroll';
 import ScrollHide from './ScrollHide';
+
 import { smoothScroll } from '~/helpers/dom';
 
-type ScreenProps = {};
-
-const Screen: React.FC<ScreenProps> = () => {
+const Screen: React.FC = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -56,4 +55,4 @@ const Screen: React.FC<ScreenProps> = () => {
   );
 };
 
-export default Screen;
+export default memo(Screen);

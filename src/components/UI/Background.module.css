@@ -1,4 +1,6 @@
 .bgImage {
+  left: 0;
+  top: 0;
   background-image: url('/assets/images/cyberpunk-city.jpg');
   background-position: calc(40% + var(--parallax-y, 0) / -3) calc(var(--parallax-y, 0) / 2);
   position: fixed;

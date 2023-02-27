@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import styles from './page.module.css';
 
 import Background from '~/components/UI/Background';
@@ -5,14 +7,15 @@ import Screen from '~/components/UI/Screen';
 import Scene from '~/components/3D/MainScene';
 import Text from '~/components/UI/Text';
 
-export default function Home() {
+const Home = () => {
   return (
     <main className={styles.main}>
-      <Scene>
-        <Text />
-        <Background />
-        <Screen />
-      </Scene>
+      <Background />
+      <Text />
+      <Scene />
+      <Screen />
     </main>
   );
-}
+};
+
+export default memo(Home);

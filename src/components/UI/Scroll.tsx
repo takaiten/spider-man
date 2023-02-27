@@ -1,25 +1,20 @@
-import React, { useState, useEffect, memo, useRef } from 'react';
-import { useScene } from 'babylonjs-hook';
+'use client';
+
+import React, { useEffect, memo, useRef } from 'react';
 import styles from './Scroll.module.css';
 
-const Scroll = memo(() => {
+const Scroll = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const scene = useScene();
 
   useEffect(() => {
-    const animGroup = scene?.getAnimationGroupByName('cameraAnimations') ?? null;
     const handleScroll = () => {
-      if (!animGroup) return;
-      const percent = window.scrollY / (document.body.clientHeight - window.innerHeight);
-      animGroup.goToFrame(percent * animGroup.to);
-      animGroup.play();
-      animGroup.pause();
       if (!ref.current) return;
+      const percent = window.scrollY / (document.body.clientHeight - window.innerHeight);
       ref.current.style.setProperty('--progress', `${percent * 100}%`);
     };
     window.addEventListener('scroll', handleScroll, false);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [scene]);
+  }, []);
 
   return (
     <div ref={ref} className={styles.scrollbar}>
@@ -27,7 +22,6 @@ const Scroll = memo(() => {
       <div className={styles.scrollbarCircle} />
     </div>
   );
-});
-Scroll.displayName = 'Scroll';
+};
 
-export default Scroll;
+export default memo(Scroll);

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import styles from './ScrollHide.module.css';
 
@@ -13,7 +15,7 @@ const ScrollHide: React.FC<React.PropsWithChildren> = (props) => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, false);
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);

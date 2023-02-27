@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
+
 import { shinGo, steelfish } from '~/helpers/font';
+
 import styles from './Text.module.css';
 
-type TextProps = {};
-
-const Text: React.FC<TextProps> = () => {
+const Text: React.FC = () => {
   return (
     <div className={[steelfish.className, styles.container].join(' ')}>
       <h1 className={styles.background} style={{ paddingTop: '30vh' }}>
@@ -34,4 +34,4 @@ const Text: React.FC<TextProps> = () => {
   );
 };
 
-export default Text;
+export default memo(Text);

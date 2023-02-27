@@ -1,96 +1,48 @@
 'use client';
 
-import React, { PropsWithChildren } from 'react';
-import SceneComponent from 'babylonjs-hook';
-import * as BABYLON from '@babylonjs/core';
+import React, { memo, Suspense } from 'react';
+import { AssetManagerContextProvider, Engine, Model, Scene, SceneEventArgs } from 'react-babylonjs';
+import { Color4 } from '@babylonjs/core';
 import '@babylonjs/loaders/glTF';
 
-import { setupCamera, setupEnvironment, setupLight, setupPipeline } from '~/helpers/3D/scene';
-import { degreesToRadians } from '~/helpers/math';
+import Loading from './Loading';
+import Lights from './Lights';
+import Camera from './Camera';
+
 import styles from './MainScene.module.css';
 
-type MainSceneProps = PropsWithChildren<{}>;
-
-const onSceneReady = (scene: BABYLON.Scene) => {
-  //! Load models
-  BABYLON.SceneLoader.ImportMeshAsync('', '/assets/objects/', 'spiderman.glb', scene);
-  BABYLON.SceneLoader.ImportMeshAsync('', '/assets/objects/', 'platform.glb', scene).then((res) => {
-    res.meshes[0].receiveShadows = true;
-  });
-
-  setupLight(scene);
-  setupPipeline(scene);
-  setupEnvironment(scene);
-
-  const startPosition = new BABYLON.Vector3(0, 1.4, 0);
-  const startRotation = degreesToRadians(110);
-
-  const camera = setupCamera(
-    'camera1',
-    startRotation,
-    degreesToRadians(90),
-    1.2,
-    startPosition,
-    scene,
-    true,
-  );
-  // camera.attachControl(true, true);
-
-  //! --- Animation ---
-  // create an animation group
-  const animationGroup = new BABYLON.AnimationGroup('cameraAnimations');
-
-  // Calculate the animation duration in milliseconds
-  const duration = 7000;
-  const fps = 60;
-  const frameCount = fps * (duration / 1000);
-
-  // Define the end position and rotation for the camera
-  const endPosition = new BABYLON.Vector3(0, 0.15, 0);
-
-  const positionAnimation = new BABYLON.Animation(
-    'positionAnimation',
-    'target',
-    fps,
-    BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
-    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT,
-  );
-
-  // Define the keyframes for the animation
-  positionAnimation.setKeys([
-    { frame: 0, value: startPosition },
-    { frame: frameCount, value: endPosition },
-  ]);
-
-  const endRotation = degreesToRadians(320);
-
-  const rotationAnimation = new BABYLON.Animation(
-    'rotationAnimation',
-    'alpha',
-    fps,
-    BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT,
-  );
-
-  // Define the keyframes for the animation
-  rotationAnimation.setKeys([
-    { frame: 0, value: startRotation },
-    { frame: frameCount, value: endRotation },
-  ]);
-
-  // add animations to the animation group
-  animationGroup.addTargetedAnimation(positionAnimation, camera);
-  animationGroup.addTargetedAnimation(rotationAnimation, camera);
+const onSceneReady = ({ scene }: SceneEventArgs) => {
+  // Disable mouse controls
+  scene.detachControl();
+  // Make babylon canvas transparent
+  scene.clearColor = new Color4(0, 0, 0, 0);
 };
 
-const MainScene: React.FC<MainSceneProps> = ({ children }) => {
+const MainScene: React.FC = () => {
   return (
     <div className={styles.scene}>
-      <SceneComponent antialias onSceneReady={onSceneReady}>
-        {children}
-      </SceneComponent>
+      <Engine antialias adaptToDeviceRatio canvasId="babylon-canvas">
+        <Scene onSceneMount={onSceneReady}>
+          <Camera />
+          <Lights />
+          <AssetManagerContextProvider>
+            <Suspense fallback={<Loading />}>
+              <Model name="spider-man" rootUrl="/assets/objects/" sceneFilename="spiderman.glb" />
+              <Model name="platform" rootUrl="/assets/objects/" sceneFilename="platform.glb" />
+            </Suspense>
+          </AssetManagerContextProvider>
+          <defaultRenderingPipeline hdr chromaticAberrationEnabled grainEnabled>
+            <chromaticAberrationPostProcess
+              assignFrom="chromaticAberration"
+              aberrationAmount={10}
+              radialIntensity={0.2}
+            />
+            <grainPostProcess assignFrom="grain" intensity={20} animated />
+          </defaultRenderingPipeline>
+        </Scene>
+      </Engine>
     </div>
   );
 };
 
-export default MainScene;
+export default memo(MainScene);
