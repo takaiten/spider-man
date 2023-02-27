@@ -20,9 +20,7 @@ export const createCameraAnimation = (camera: BABYLON.ArcRotateCamera) => {
     fps,
     BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
     BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT,
-    // true,
   );
-  //   positionAnimation.blendingSpeed = 0.01;
 
   // Define the keyframes for the animation
   positionAnimation.setKeys([
@@ -39,9 +37,7 @@ export const createCameraAnimation = (camera: BABYLON.ArcRotateCamera) => {
     fps,
     BABYLON.Animation.ANIMATIONTYPE_FLOAT,
     BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT,
-    // true,
   );
-  //   rotationAnimation.blendingSpeed = 0.01;
 
   // Define the keyframes for the animation
   rotationAnimation.setKeys([
