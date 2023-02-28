@@ -3,21 +3,6 @@
   position: relative;
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-
-}
-
-/* Mobile and Tablet */
-@media (max-width: 1023px) {
-
-}
-
-/* Dark theme specific */
-@media (prefers-color-scheme: dark) {
-
-}
-
 @keyframes rotate {
   from {
     transform: rotate(360deg);
